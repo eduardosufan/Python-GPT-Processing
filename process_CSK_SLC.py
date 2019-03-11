@@ -25,7 +25,7 @@ path_input       = "/media/esufan/DATOS/CONAE/FusionSAR/Productos/COSMO-SKYMED/L
 extension_input  = "h5"
 path_output      = "/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/"
 band             = "" #Sigma_0
-extension_output = "BEAM-DIMAP"#"GeoTIFF" #"HDF5"
+extension_output = "BEAM-DIMAP" #"GeoTIFF" #"HDF5"
 
 # Multilook:
 n_looks_range   = "3"
@@ -33,11 +33,14 @@ n_looks_azimuth = "3"
 square_pixel    = "True"
 
 # Speckle filter:
-spk_filter         = '"Lee Sigma"'
+spk_filter         = '"Gamma Map"'#'"Lee Sigma"'
 n_looks            = "1"
 window_size        = "7x7"
 sigma              = "0.9"
 target_window_size = "3x3"
+filter_size_x      = "3"
+filter_size_y      = "3"
+estimate_equivalent_n_looks = "true"
 
 # Terrain correction:
 DEM            = '"SRTM 1Sec HGT"'

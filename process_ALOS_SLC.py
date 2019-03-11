@@ -34,7 +34,10 @@ n_looks_azimuth = "2"
 square_pixel    = "True"
 
 # Speckle filter:
-spk_filter         = '"Lee Sigma"'
+spk_filter         = '"Median"' #'"Gamma Map"'#'"Lee Sigma"'
+filter_size_x      = "3"
+filter_size_y      = "3"
+estimate_equivalent_n_looks = "true"
 n_looks            = "1"
 window_size        = "7x7"
 sigma              = "0.9"
@@ -154,7 +157,15 @@ def processs_ALOS(image_input):
         os.makedirs(path_output)
 
     # Create gpt command to run process.
-    gpt_command = gpt_path + path_batch + filename_batch + ' -Pinput=' + path_input + image_input + ' -Pn_looks_range=' + n_looks_range + ' -Pn_looks_azimuth=' + n_looks_azimuth + ' -Psquare_pixel=' + square_pixel + ' -PDEM=' + DEM + ' -Pdem_resampling=' + dem_resampling + ' -Pn_gcps=' + n_gcps + ' -Pcoarse_window_width=' + coarse_window_width + ' -Pcoarse_window_height=' + coarse_window_height + ' -Prow_interp_factor=' + row_interp_factor + ' -Pcol_interp_factor=' + col_interp_factor + ' -Pmax_iteration=' + max_iteration + ' -Pgcp_tolerance=' + gcp_tolerance + ' -Prms_threshold=' + rms_threshold + ' -Ppol_warp_order=' + pol_warp_order + ' -Pimg_resampling_method=' + img_resampling_method + ' -Ppixel_spacing_meters=' + pixel_spacing_meters+ ' -Pspk_filter=' + spk_filter + ' -Pn_looks=' + n_looks + ' -Pwindow_size=' + window_size + ' -Psigma=' + sigma + ' -Ptarget_window_size=' + target_window_size + ' -Poutput=' + path_output + image_output_name + ' -Pformat_output=' + extension_output
+    if spk_filter == '"Gamma Map"':
+        filter_conf = ' -Pfilter_size_x=' + filter_size_x + ' -Pfilter_size_y=' + filter_size_y +' -Pestimate_equivalent_n_looks='+ estimate_equivalent_n_looks
+    elif spk_filter == '"Median"':
+        filter_conf = ' -Pfilter_size_x=' + filter_size_x + ' -Pfilter_size_y=' + filter_size_y
+    elif spk_filter == '"Lee Sigma"':
+        filter_conf  = ' -Pn_looks=' + n_looks + ' -Pwindow_size=' + window_size + ' -Psigma=' + sigma + ' -Ptarget_window_size=' + target_window_size
+
+    #problemas 
+    gpt_command = gpt_path + path_batch + filename_batch + ' -Pinput=' + path_input + image_input + ' -Pn_looks_range=' + n_looks_range + ' -Pn_looks_azimuth=' + n_looks_azimuth + ' -Psquare_pixel=' + square_pixel + ' -PDEM=' + DEM + ' -Pdem_resampling=' + dem_resampling + ' -Pn_gcps=' + n_gcps + ' -Pcoarse_window_width=' + coarse_window_width + ' -Pcoarse_window_height=' + coarse_window_height + ' -Prow_interp_factor=' + row_interp_factor + ' -Pcol_interp_factor=' + col_interp_factor + ' -Pmax_iteration=' + max_iteration + ' -Pgcp_tolerance=' + gcp_tolerance + ' -Prms_threshold=' + rms_threshold + ' -Ppol_warp_order=' + pol_warp_order + ' -Pimg_resampling_method=' + img_resampling_method + ' -Ppixel_spacing_meters=' + pixel_spacing_meters+ ' -Pspk_filter=' + spk_filter + filter_conf + ' -Poutput=' + path_output + image_output_name + ' -Pformat_output=' + extension_output
     print("Executing: ", gpt_command)
 
     os.system(gpt_command)

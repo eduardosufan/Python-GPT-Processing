@@ -19,12 +19,14 @@ path_input        = "/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGr
 extension_input   = "tif"
 path_output       = "/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/coregistered/"
 band              = "" #Sigma_0
-image_output_name = "coregistered_CSK_ALOS"
+image_output_name = "coregistered_CSK_CSK"
 extension_output  = "GeoTIFF" #"BEAM-DIMAP" #"HDF5"
 
 # ProductSet-Reader: 
 # WARNING: you have to put ProductSet-Reader on top of xml code, to avoid GPT error.
-input_list = "/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/subset_CSKS2_SCS_B_HI_09_HH_RA_SF_20140319104632_20140319104641_ML_CAL_SPK_TC.tif,/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/subset_ALPSRP273806550-L1_ML_CAL_SPK_TC.tif"
+#input_list = "/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/subset_CSKS2_SCS_B_HI_09_HH_RA_SF_20140319104632_20140319104641_ML_CAL_SPK_TC.tif,/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/subset_ALPSRP273806550-L1_ML_CAL_SPK_TC.tif"
+#input_list = "/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/subset_CSKS3_SCS_B_HI_08_HH_RA_SF_20160512104404_20160512104411_ML_CAL_SPK_TC.tif,/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/subset_CSKS2_SCS_B_HI_08_HH_RA_SF_20160511104402_20160511104409_ML_CAL_SPK_TC.tif"
+input_list = "/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/subset_CSKS3_SCS_B_HI_08_HH_RA_SF_20160512104404_20160512104411_ML_CAL_SPK_TC.tif,/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/subsets/subset_CSKS2_SCS_B_HI_09_HH_RA_SF_20140319104632_20140319104641_ML_CAL_SPK_TC.tif"
 
 # CreateStack:
 resampling_type       = "BICUBIC_INTERPOLATION"
@@ -45,7 +47,7 @@ only_GCPs_on_land                 = "false"
 rms_threshold         = "0.05"
 warp_polynomial_order = "1"
 interpolation_method  = '"Cubic convolution (6 points)"'
-open_residuals_file   = "false"
+open_residuals_file   = "true"
 
 
 
