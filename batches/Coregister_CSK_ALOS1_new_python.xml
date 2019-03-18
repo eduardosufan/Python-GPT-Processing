@@ -1,0 +1,93 @@
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="ProductSet-Reader">
+    <operator>ProductSet-Reader</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <fileList>$input_list</fileList>
+    </parameters>
+  </node>
+  <node id="CreateStack">
+    <operator>CreateStack</operator>
+    <sources>
+      <sourceProduct.2 refid="ProductSet-Reader"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <masterBands/>
+      <sourceBands/>
+      <resamplingType>$resampling_type</resamplingType>
+      <extent>$output_extents</extent>
+      <initialOffsetMethod>$initial_offset_method</initialOffsetMethod>
+    </parameters>
+  </node>
+  <node id="Cross-Correlation">
+    <operator>Cross-Correlation</operator>
+    <sources>
+      <sourceProduct refid="CreateStack"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <numGCPtoGenerate>$n_gcps</numGCPtoGenerate>
+      <coarseRegistrationWindowWidth>$coarse_registration_window_width</coarseRegistrationWindowWidth>
+      <coarseRegistrationWindowHeight>$coarse_registration_window_height</coarseRegistrationWindowHeight>
+      <rowInterpFactor>$row_interp_factor</rowInterpFactor>
+      <columnInterpFactor>$col_interp_factor</columnInterpFactor>
+      <maxIteration>$max_interation</maxIteration>
+      <gcpTolerance>$gcp_tolerance</gcpTolerance>
+      <applyFineRegistration>true</applyFineRegistration>
+      <inSAROptimized>true</inSAROptimized>
+      <fineRegistrationWindowWidth>32</fineRegistrationWindowWidth>
+      <fineRegistrationWindowHeight>32</fineRegistrationWindowHeight>
+      <fineRegistrationWindowAccAzimuth>16</fineRegistrationWindowAccAzimuth>
+      <fineRegistrationWindowAccRange>16</fineRegistrationWindowAccRange>
+      <fineRegistrationOversampling>16</fineRegistrationOversampling>
+      <coherenceWindowSize>3</coherenceWindowSize>
+      <coherenceThreshold>0.6</coherenceThreshold>
+      <useSlidingWindow>false</useSlidingWindow>
+      <computeOffset>false</computeOffset>
+      <onlyGCPsOnLand>$only_GCPs_on_land</onlyGCPsOnLand>
+    </parameters>
+  </node>
+  <node id="Warp">
+    <operator>Warp</operator>
+    <sources>
+      <sourceProduct refid="Cross-Correlation"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <rmsThreshold>$rms_threshold</rmsThreshold>
+      <warpPolynomialOrder>$warp_polynomial_order</warpPolynomialOrder>
+      <interpolationMethod>$interpolation_method</interpolationMethod>
+      <demRefinement>false</demRefinement>
+      <demName>SRTM 3Sec</demName>
+      <excludeMaster>false</excludeMaster>
+      <openResidualsFile>$open_residuals_file</openResidualsFile>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Warp"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>$filename_output</file>
+      <formatName>$extension_output</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="CreateStack">
+      <displayPosition x="68.0" y="110.0"/>
+    </node>
+    <node id="Cross-Correlation">
+      <displayPosition x="162.0" y="214.0"/>
+    </node>
+    <node id="Warp">
+      <displayPosition x="352.0" y="203.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="458.0" y="201.0"/>
+    </node>
+    <node id="ProductSet-Reader">
+      <displayPosition x="34.0" y="43.0"/>
+    </node>
+  </applicationData>
+</graph>
