@@ -1,0 +1,48 @@
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/CSK_processed_GPT.tif</file>
+    </parameters>
+  </node>
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands>Sigma0_HH</sourceBands>
+      <region>0,0,10248,10079</region>
+      <geoRegion>POLYGON ((-64.53433227539062 -31.303739547729492, -64.37297058105469 -31.303739547729492, -64.37297058105469 -31.43506622314453, -64.53433227539062 -31.43506622314453, -64.53433227539062 -31.303739547729492, -64.53433227539062 -31.303739547729492))</geoRegion>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+      <copyMetadata>true</copyMetadata>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>/media/esufan/DATOS/CONAE/FusionSAR/Productos/CorregistroGrueso/GPT_test/Subset_CSK_processed_GPT.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+            <displayPosition x="25.0" y="38.0"/>
+    </node>
+    <node id="Subset">
+      <displayPosition x="156.0" y="145.0"/>
+    </node>
+    <node id="Write">
+            <displayPosition x="295.0" y="231.0"/>
+    </node>
+  </applicationData>
+</graph>
